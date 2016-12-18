@@ -6,7 +6,11 @@ var port  	 = process.env.PORT || 8080; 			// Cogemos el puerto 8080
 
 // Configuracion
 mongoose.connect('mongodb://localhost:27017/exam'); 	// Hacemos la conexión a la base de datos de Mongo
-
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.configure(function() {
     app.use(express.static(__dirname + '/public'));
     app.use(express.logger('dev')); 						// activamos el log en modo 'dev'
